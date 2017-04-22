@@ -3,20 +3,31 @@
 
 #define NUM_THREADS 1000
 
+/*
+	@author Nikolay Bonev
+	The program shows concurrency between threads without mutexes.
+*/
+
+//Shared variable between threads
 int i;
 
-void inc_i()
+//Increment function. Changes the value of the shared variable 'i'
+void increment(void)
 {
 	i++;
 }
 
+/*
+	Thread function. 
+	Calls one thousand times the increment function. All threads enters the critical section at ones and can't guaranteed that the result  value will be saved properly.
+*/
 void *inc_var()
 {
 	int j;
 
 	for(j = 0; j < NUM_THREADS; j++)
 	{
-		inc_i();
+		increment();
 	}
 }
 
